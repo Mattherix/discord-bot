@@ -1,6 +1,8 @@
-from nextcord import Client
-
 import logging
+import os
+
+from dotenv import load_dotenv
+from nextcord import Client
 
 from src.utils import Utils
 
@@ -16,12 +18,20 @@ def logger(filename: str):
     logger.addHandler(handler)
 
 
+def main() -> None:
+    logger('discord.log')
+
+    load_dotenv()
+    DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+
+    bot.add_cog(Utils(bot))
+    bot.run(DISCORD_TOKEN)
+
+
 @bot.event
 async def on_ready():
     print(f'We have logged in as {bot.user}')
 
-if __name__ == '__main__':
-    logger('../discord.log')
 
-    bot.add_cog(Utils(bot))
-    bot.run('MTAwMDQ4ODU1MTM1MzQzMDEwNw.GX6EjI.I0iZX-6icz50mxdjGc-H_33E0WD0_2QTbA_PPI')
+if __name__ == '__main__':
+    main()

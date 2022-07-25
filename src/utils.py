@@ -1,4 +1,4 @@
-from nextcord import slash_command, Locale
+from nextcord import slash_command
 from nextcord.ext import commands
 
 
